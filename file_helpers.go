@@ -8,6 +8,7 @@ import (
 	"io"
 	"math"
 	"os"
+	"strings"
 )
 
 // Constants
@@ -113,4 +114,16 @@ func AreFilesIdentical(lhs, rhs string) (bool, error) {
 	}
 
 	return true, nil
+}
+
+func EscapePath(path string) string {
+	return strings.Replace(path, "/", "^", -1)
+}
+
+func UnescapePath(path string) string {
+	return strings.Replace(path, "^", "/", -1)
+}
+
+func UnescapePercentPath(path string) string {
+	return strings.Replace(path, "%5E", "%2F", -1)
 }
